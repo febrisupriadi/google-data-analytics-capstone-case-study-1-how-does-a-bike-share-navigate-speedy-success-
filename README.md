@@ -1,2 +1,0 @@
-# google-data-analytics-capstone-case-study-1-how-does-a-bike-share-navigate-speedy-success-
-Cyclistic Bike-Share Case Study This project is part of the Google Data Analytics Capstone. It analyzes how Cyclistic’s annual members and casual riders use bikes differently. The analysis includes data cleaning, processing, visualization, and insights to support marketing strategies for converting casual riders into members.
