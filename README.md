@@ -7,7 +7,7 @@ Proyek Capstone Google Data Analytics
 
 📘 Tentang Proyek
 
-Proyek ini merupakan bagian dari Google Data Analytics Professional Certificate. Analisis ini menggunakan data historis perjalanan sepeda dari Cyclistic, sebuah perusahaan bike-share fiktif di Chicago, untuk memahami bagaimana anggota tahunan (annual members) dan pengguna kasual (casual riders) menggunakan sepeda secara berbeda.
+Proyek ini merupakan bagian dari Google Data Analytics Professional Certificate. Analisis ini menggunakan data historis perjalanan sepeda dari Cyclistic (2019-Q1 dan 2020-Q1), sebuah perusahaan bike-share fiktif di Chicago, untuk memahami bagaimana anggota tahunan (annual members) dan pengguna kasual (casual riders) menggunakan sepeda secara berbeda.
 
 Tujuan utamanya adalah memberikan rekomendasi berbasis data untuk membantu tim pemasaran Cyclistic mengonversi pengguna kasual menjadi anggota tahunan, sehingga mendukung pertumbuhan bisnis jangka panjang.
 
