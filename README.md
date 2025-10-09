@@ -1,4 +1,4 @@
-[Read in English](README_EN.md)
+[Read in ENGLISH](README_EN.md)
 
 
 Studi Kasus Bike-Share Cyclistic
