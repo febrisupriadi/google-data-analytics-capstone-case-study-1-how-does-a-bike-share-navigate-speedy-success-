@@ -107,6 +107,7 @@ Diketemukan fakta bahwa R membaca seluruh isi baris sebagai satu string panjang,
 Solusinya menggunakan read_delim() dari readr dengan delim = ";"
 
 ```{r}
+# 5️⃣ Merubah/mengenali delimiter
 divvy_2019_Q1 <- read_delim("case-study-1/Divvy_Trips_2019_Q1_Clean.csv", delim = ";")
 
 #hasil Rows: 365069 Columns: 8 
@@ -124,10 +125,30 @@ divvy_2020_Q1 <- read_delim("case-study-1/Divvy_Trips_2020_Q1_Clean.csv", delim 
 #chr  (4): ride_id, start_station_name, end_station_name, member_casual
 #dbl  (2): start_station_id, end_station_id
 #dttm (2): started_at, ended_at
+
+# 6️⃣ Verifikasi Struktur Kolom
+glimpse(divvy_2019_Q1)
+glimpse(divvy_2020_Q1)
+colnames(divvy_2019_Q1)
+
+#Kedua file berisi 8 kolom yang sama, yaitu:
+#[1] "ride_id"            "started_at"         "ended_at"           "start_station_id"  
+#[5] "start_station_name" "end_station_id"     "end_station_name"   "member_casual"  
 ```
 
 Sebelum digabungkan:
 - Tipe data `ride_id` diseragamkan ke `character` karena perbedaan format antara 2019 dan 2020.
+```{r}
+# 7️⃣ Samakan tipe kolom ride_id
+divvy_2019_Q1 <- divvy_2019_Q1 %>%
+  mutate(ride_id = as.character(ride_id))
+
+# 8️⃣ Gabungkan kedua file (Append)
+append1 <- bind_rows(divvy_2019_Q1, divvy_2020_Q1)
+
+Catatan("Jumlah total baris hasil Append1:791956 entries, 9 total columns ", nrow(append1), "\n")
+```
+  
 - Kolom `ride_length` dihitung sebagai selisih waktu (`ended_at - started_at`) dalam menit.
 - Ditemukan **25 baris dengan durasi negatif**, disimpan di `issues/Append1_negative_ride_length.csv`.
 - Dataset bersih dan siap analisis disimpan sebagai `Append1_final.csv` dengan tambahan kolom `day_of_week`.
