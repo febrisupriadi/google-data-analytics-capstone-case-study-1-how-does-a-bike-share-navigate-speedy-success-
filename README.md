@@ -97,30 +97,31 @@ library(dplyr)
 library(lubridate)
 library(readr)
 
-# 3️⃣ Upload Data dari hasil Power Query Excel ke Project Folder di Posit
-  (folder project : case-study-1 )
+# 3️⃣ Upload Data dari hasil Power Query Excel ke Project Folder di Posit  (folder project : case-study-1 )
 # 4️⃣ Import Data 
 divvy_2019-Q1 <- read_csv("case-study-1/Divvy_Trips_2019_Q1_Clean.csv")
 divvy_2020_Q1 <- read_csv("case-study-1/Divvy_Trips_2020_Q1_Clean.csv")
 
-diketemukan fakta bahwa R membaca seluruh isi baris sebagai satu string panjang, karena tidak mengenali ; sebagai pemisah kolom
-solusinya menggunakan read_delim() dari readr dengan delim = ";"
+#diketemukan fakta bahwa R membaca seluruh isi baris sebagai satu string panjang, karena tidak mengenali ; sebagai pemisah kolom
+#solusinya menggunakan read_delim() dari readr dengan delim = ";"
 
 divvy_2019_Q1 <- read_delim("case-study-1/Divvy_Trips_2019_Q1_Clean.csv", delim = ";")
-Rows: 365069 Columns: 8 
-── Column specification ──────────────────────────────────���──────────────────────────────────────
-Delimiter: ";"
-chr  (3): start_station_name, end_station_name, member_casual
-dbl  (3): ride_id, start_station_id, end_station_id
-dttm (2): started_at, ended_at
+
+#hasil Rows: 365069 Columns: 8 
+#── Column specification ──────────────────────────────────���──────────────────────────────────────
+#Delimiter: ";"
+#chr  (3): start_station_name, end_station_name, member_casual
+#dbl  (3): ride_id, start_station_id, end_station_id
+#dttm (2): started_at, ended_at
 
 divvy_2020_Q1 <- read_delim("case-study-1/Divvy_Trips_2020_Q1_Clean.csv", delim = ";")
-Rows: 426887 Columns: 8                                                                          
-── Column specification ──────────────────────────────────���──────────────────────────────────────
-Delimiter: ";"
-chr  (4): ride_id, start_station_name, end_station_name, member_casual
-dbl  (2): start_station_id, end_station_id
-dttm (2): started_at, ended_at
+
+#hasil Rows: 426887 Columns: 8                                                                          
+#── Column specification ──────────────────────────────────���──────────────────────────────────────
+#Delimiter: ";"
+#chr  (4): ride_id, start_station_name, end_station_name, member_casual
+#dbl  (2): start_station_id, end_station_id
+#dttm (2): started_at, ended_at
 ```
 
 Sebelum digabungkan:
