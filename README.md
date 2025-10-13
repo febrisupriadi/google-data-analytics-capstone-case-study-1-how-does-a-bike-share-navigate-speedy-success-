@@ -145,8 +145,10 @@ divvy_2019_Q1 <- divvy_2019_Q1 %>%
 
 # 8️⃣ Gabungkan kedua file (Append)
 append1 <- bind_rows(divvy_2019_Q1, divvy_2020_Q1)
-
-Catatan("Jumlah total baris hasil Append1:791956 entries, 9 total columns ", nrow(append1), "\n")
+cat("Jumlah total baris hasil Append1:", nrow(append1),
+    "entries,", ncol(append1), "total columns\n")
+    
+#hasilnya : Jumlah total baris hasil Append1: 791956 entries, 9 total columns
 ```
   
 - Kolom `ride_length` dihitung sebagai selisih waktu (`ended_at - started_at`) dalam menit.
