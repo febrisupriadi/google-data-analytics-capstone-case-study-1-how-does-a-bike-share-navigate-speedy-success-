@@ -191,6 +191,11 @@ write_csv(append1_clean, "case-study-1/Append1_final.csv")
 
 cat("✅ File 'Append1_final.csv' siap untuk analisis!\n")
 ``` 
+
+**Folder Akhir di RStudio (Posit)**
+Anda dapat mengakses proyek R ini di Posit Cloud:  
+[Klik di sini untuk membuka proyek](https://posit.cloud/content/11150749)
+
 | File / Folder                             | Ukuran  | Fungsi / Keterangan                                                                                                                          |
 | ----------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Append1_final.csv**                     | 97.9 MB | ✅ Dataset hasil akhir (gabungan 2019 Q1 + 2020 Q1) — sudah bersih, memiliki kolom `ride_length` dan `day_of_week`, siap untuk analisis di R. |
