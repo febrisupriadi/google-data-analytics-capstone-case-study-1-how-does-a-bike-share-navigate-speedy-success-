@@ -185,24 +185,115 @@ append1_clean <- append1 %>% filter(ride_length >= 0)
 # 1️⃣2️⃣ Tambahkan kolom day_of_week
 append1_clean <- append1_clean %>%
   mutate(day_of_week = wday(started_at, label = TRUE, abbr = FALSE))
+```
 
-# 1️⃣3️⃣ Simpan hasil akhir
+# 1️⃣3️⃣ Simpan hasil akhir (sementara)
+```{r}
 write_csv(append1_clean, "case-study-1/Append1_final.csv")
 
 cat("✅ File 'Append1_final.csv' siap untuk analisis!\n")
 ``` 
+---
 
-**Folder Akhir di RStudio (Posit)**
-Anda dapat mengakses proyek R ini di Posit Cloud:  
-[Klik di sini untuk membuka proyek](https://posit.cloud/content/11150749)
+🔍 Pemeriksaan dan Penghapusan Duplikasi ride_id
 
-| File / Folder                             | Ukuran  | Fungsi / Keterangan                                                                                                                          |
-| ----------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Append1_final.csv**                     | 97.9 MB | ✅ Dataset hasil akhir (gabungan 2019 Q1 + 2020 Q1) — sudah bersih, memiliki kolom `ride_length` dan `day_of_week`, siap untuk analisis di R. |
-| **Divvy_Trips_2019_Q1_Clean.csv**         | 37.6 MB | File mentah hasil pembersihan 2019 Q1 sebelum digabung.                                                                                      |
-| **Divvy_Trips_2020_Q1_Clean.csv**         | 47 MB   | File mentah hasil pembersihan 2020 Q1 sebelum digabung.                                                                                      |
-| **Divvy_Trips_2019_Q1&2020-Q1_Clean.rar** | 12.5 MB | Arsip kompresi (mungkin backup manual sebelum penggabungan).                                                                                 |
-| **issues/** *(folder)*                    | —       | Menyimpan hasil deteksi baris error seperti `Append1_negative_ride_length.csv`.                                                              |
+Sebelum benar-benar final, proses validasi ulang di RStudio (Posit), ditemukan sejumlah duplikasi ride_id setelah penggabungan dua file (Divvy_Trips_2019_Q1_Clean.csv dan Divvy_Trips_2020_Q1_Clean.csv).
+Langkah-langkah pemeriksaan dan pembersihan dilakukan sebagai berikut:
+```{r}
+duplicate_ids <- append1_clean %>%
+    group_by(ride_id) %>%
+    filter(n() > 1)
+
+nrow(duplicate_ids)
+``` 
+
+Output:
+
+[1] 34
+
+
+Artinya terdapat 34 baris duplikat berdasarkan ride_id.
+Pemeriksaan lanjutan memperlihatkan bahwa duplikat ini berasal dari 17 nilai ride_id yang muncul dua kali (lihat contoh hasil di bawah).
+```{r}
+duplicate_ids %>% arrange(ride_id)
+```
+
+Cuplikan hasil:
+
+# A tibble: 34 × 10
+# Groups:   ride_id [17]
+   ride_id  started_at          ended_at            start_station_id start_station_name
+   <chr>    <dttm>              <dttm>                         <dbl> <chr>
+ 1 1,01E+15 2020-02-01 10:34:00 2020-02-01 10:55:00              181 LaSalle St & Illinois St
+ 2 1,01E+15 2020-03-11 18:10:00 2020-03-11 18:20:00               85 Michigan Ave & Oak St
+ 3 1,68E+15 2020-01-25 13:09:00 2020-01-25 13:14:00              306 Sheridan Rd & Buena Ave
+ 4 1,68E+15 2020-03-19 11:01:00 2020-03-19 11:30:00              229 Southport Ave & Roscoe St
+ 5 2,16E+15 2020-01-17 08:36:00 2020-01-17 08:39:00               61 Wood St & Milwaukee Ave
+ 6 2,16E+15 2020-01-22 12:08:00 2020-01-22 12:15:00              100 Orleans St & Merchandise Mart
+# … 24 baris tambahan
+
+🧹 Menghapus Duplikasi
+
+Baris-baris duplikat ini tidak mewakili perjalanan unik, melainkan pengulangan ride_id yang sama.
+Untuk itu dilakukan penghapusan menggunakan fungsi distinct():
+```{r}
+append1_nodup <- append1_clean %>%
+    distinct(ride_id, .keep_all = TRUE)
+```
+
+Kemudian diverifikasi ulang:
+```{r}
+append1_nodup %>%
+    summarise(
+        total_rows = n(),
+        unique_ids = n_distinct(ride_id),
+        duplicated_ids = n() - n_distinct(ride_id)
+    )
+```
+
+Output:
+
+# A tibble: 1 × 3
+  total_rows unique_ids duplicated_ids
+       <int>      <int>          <int>
+1     791914     791914              0
+
+💾 Simpan Dataset Final
+
+Dataset bersih tanpa duplikasi disimpan kembali sebagai file baru:
+
+write_csv(append1_nodup, "case-study-1/Append1_final_nodup.csv")
+
+cat("✅ File 'Append1_final_nodup.csv' disimpan tanpa duplikasi ride_id.\n")
+
+
+Output Console:
+
+✅ File 'Append1_final_nodup.csv' disimpan tanpa duplikasi ride_id.
+
+📊 Ringkasan Hasil
+Deskripsi	Nilai
+Total baris awal	791,948
+Baris duplikat ditemukan	34
+Total baris setelah pembersihan	791,914
+Duplikasi tersisa	0
+File akhir	Append1_final_nodup.csv
+
+
+📂 Struktur Folder di RStudio (Posit) — Setelah Penghapusan Duplikasi
+
+Struktur Folder sebagai hasil akhir setelah tahap append, pembersihan data, dan penghapusan duplikasi ride_id.
+🔗[Klik di sini untuk membuka proyek Posit Cloud](https://posit.cloud/content/11150749)
+
+| File / Folder                             | Ukuran  | Tanggal Diperbarui    | Keterangan                                                             |
+| ----------------------------------------- | ------- | --------------------- | ---------------------------------------------------------------------- |
+| **Append1_final.csv**                     | 97.9 MB | Oct 13, 2025, 4:41 PM | Dataset hasil gabungan awal (sebelum penghapusan duplikasi)            |
+| **Append1_final_nodup.csv**               | 97.9 MB | Oct 13, 2025, 6:39 PM | ✅ Dataset akhir bersih tanpa duplikasi `ride_id`                       |
+| **Divvy_Trips_2019_Q1_Clean.csv**         | 37.6 MB | Oct 13, 2025, 4:16 PM | Data hasil pembersihan awal Q1 2019                                    |
+| **Divvy_Trips_2020_Q1_Clean.csv**         | 47 MB   | Oct 13, 2025, 4:17 PM | Data hasil pembersihan awal Q1 2020                                    |
+| **Divvy_Trips_2019_Q1&2020-Q1_Clean.rar** | 12.5 MB | Oct 13, 2025, 4:15 PM | Arsip cadangan dua file sumber sebelum digabung                        |
+| **issues/**                               | —       | —                     | Folder berisi hasil deteksi error (`Append1_negative_ride_length.csv`) |
+                                                              |
 
 ---
 
