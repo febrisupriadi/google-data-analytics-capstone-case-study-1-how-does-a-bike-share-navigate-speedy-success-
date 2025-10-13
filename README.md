@@ -85,7 +85,7 @@ Langkah-langkah pembersihan tercatat sebagai berikut:
 
 File `Divvy_Trips_2019_Q1_Clean.csv` dan `Divvy_Trips_2020_Q1_Clean.csv` digabungkan menggunakan R (`bind_rows()`) untuk menghasilkan dataset gabungan `Append1` dengan total **791.956 baris**.
 
-####Langkah-langkah di Posit###
+####**Langkah-langkah di RStudio/Posit**###
 ```{r}
 # 1️⃣ Instalasi Package
 install.packages("dplyr")
@@ -101,10 +101,12 @@ library(readr)
 # 4️⃣ Import Data 
 divvy_2019-Q1 <- read_csv("case-study-1/Divvy_Trips_2019_Q1_Clean.csv")
 divvy_2020_Q1 <- read_csv("case-study-1/Divvy_Trips_2020_Q1_Clean.csv")
+```
 
-#diketemukan fakta bahwa R membaca seluruh isi baris sebagai satu string panjang, karena tidak mengenali ; sebagai pemisah kolom
-#solusinya menggunakan read_delim() dari readr dengan delim = ";"
+Diketemukan fakta bahwa R membaca seluruh isi baris sebagai satu string panjang, karena tidak mengenali ; sebagai pemisah kolom
+Solusinya menggunakan read_delim() dari readr dengan delim = ";"
 
+```{r}
 divvy_2019_Q1 <- read_delim("case-study-1/Divvy_Trips_2019_Q1_Clean.csv", delim = ";")
 
 #hasil Rows: 365069 Columns: 8 
