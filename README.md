@@ -146,10 +146,23 @@ Struktur direktori proyek ini disusun untuk menjaga keteraturan antara data ment
  ┃ ┗ analysis_steps.xlsx
  ┗ 📜 README.md
 
+```
+
+---
+***Penjelasan Struktur Folder
+
+| Folder           | Isi                                  | Keterangan                                         |
+| ---------------- | ------------------------------------ | -------------------------------------------------- |
+| `/data/raw/`     | File CSV mentah dari Divvy Trip Data | Data asli tanpa perubahan                          |
+| `/data/cleaned/` | File hasil pembersihan data gabungan | Siap dianalisis                                    |
+| `/notebooks/`    | File Excel atau skrip analisis       | Proses analisis deskriptif dan pivot               |
+| `/visuals/`      | Gambar hasil visualisasi data        | Grafik dan diagram                                 |
+| `README.md`      | Dokumentasi utama proyek             | Berisi deskripsi lengkap proyek dan hasil analisis |
 
 ---
 
 ✅ *This README documents all project phases: Ask → Prepare → Process → Analyze → Share → Act.*
 
 _Last updated: October 13th, 2025_
+
 
