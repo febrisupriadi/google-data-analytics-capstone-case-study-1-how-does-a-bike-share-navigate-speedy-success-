@@ -65,6 +65,7 @@ Menghasilkan analisis berbasis data dan rekomendasi yang dapat membantu tim mark
 
 ### 5. 🧹 Pembersihan Data (Process Phase)
 
+**Menggunakan Microsoft Excel**
 Data digabungkan dari dua file (Q1 2019 & Q1 2020) dan dibersihkan menggunakan Microsoft Excel.  
 Langkah-langkah pembersihan tercatat sebagai berikut:
 
@@ -78,6 +79,57 @@ Langkah-langkah pembersihan tercatat sebagai berikut:
 | 6 | Buat kolom `day_of_week = WEEKDAY(started_at,1)` | Pola penggunaan mingguan | Excel formula | Kolom berhasil dibuat |
 | 7 | Filter `ride_length <= 0` dan `> 24 jam` | Menghapus data error/outlier | Conditional filter | 25 baris dihapus |
 | 8 | Simpan dataset bersih | Menyimpan hasil final | Save As `.csv` | Siap dianalisis |
+
+**Menggunakan RStudio (Posit)**
+#### 🔄 Penggabungan Data di R (Append1)
+
+File `Divvy_Trips_2019_Q1_Clean.csv` dan `Divvy_Trips_2020_Q1_Clean.csv` digabungkan menggunakan R (`bind_rows()`) untuk menghasilkan dataset gabungan `Append1` dengan total **791.956 baris**.
+
+####Langkah-langkah di Posit###
+```{r}
+# 1️⃣ Instalasi Package
+install.packages("dplyr")
+install.packages("lubridate")
+install.packages("readr")
+
+# 2️⃣ Load library (wajib setiap sesi baru)
+library(dplyr)
+library(lubridate)
+library(readr)
+
+# 3️⃣ Upload Data dari hasil Power Query Excel ke Project Folder di Posit
+  (folder project : case-study-1 )
+# 4️⃣ Import Data 
+divvy_2019-Q1 <- read_csv("case-study-1/Divvy_Trips_2019_Q1_Clean.csv")
+divvy_2020_Q1 <- read_csv("case-study-1/Divvy_Trips_2020_Q1_Clean.csv")
+
+diketemukan fakta bahwa R membaca seluruh isi baris sebagai satu string panjang, karena tidak mengenali ; sebagai pemisah kolom
+solusinya menggunakan read_delim() dari readr dengan delim = ";"
+
+divvy_2019_Q1 <- read_delim("case-study-1/Divvy_Trips_2019_Q1_Clean.csv", delim = ";")
+Rows: 365069 Columns: 8 
+── Column specification ──────────────────────────────────���──────────────────────────────────────
+Delimiter: ";"
+chr  (3): start_station_name, end_station_name, member_casual
+dbl  (3): ride_id, start_station_id, end_station_id
+dttm (2): started_at, ended_at
+
+divvy_2020_Q1 <- read_delim("case-study-1/Divvy_Trips_2020_Q1_Clean.csv", delim = ";")
+Rows: 426887 Columns: 8                                                                          
+── Column specification ──────────────────────────────────���──────────────────────────────────────
+Delimiter: ";"
+chr  (4): ride_id, start_station_name, end_station_name, member_casual
+dbl  (2): start_station_id, end_station_id
+dttm (2): started_at, ended_at
+```
+
+Sebelum digabungkan:
+- Tipe data `ride_id` diseragamkan ke `character` karena perbedaan format antara 2019 dan 2020.
+- Kolom `ride_length` dihitung sebagai selisih waktu (`ended_at - started_at`) dalam menit.
+- Ditemukan **25 baris dengan durasi negatif**, disimpan di `issues/Append1_negative_ride_length.csv`.
+- Dataset bersih dan siap analisis disimpan sebagai `Append1_final.csv` dengan tambahan kolom `day_of_week`.
+
+
 
 ---
 
