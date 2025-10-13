@@ -132,7 +132,7 @@ Berdasarkan hasil analisis, tiga rekomendasi utama adalah:
 Struktur direktori proyek ini disusun untuk menjaga keteraturan antara data mentah, hasil pembersihan, notebook analisis, serta visualisasi hasil.
 
 ```bash
-📦 cyclistic-case-study
+📦 google-data-analytics-capstone-case-study-1-how-does-a-bike-share-navigate-speedy-success-
  ┣ 📂 data
  ┃ ┣ 📂 raw
  ┃ ┃ ┣ Divvy_Trips_2019_Q1.csv
