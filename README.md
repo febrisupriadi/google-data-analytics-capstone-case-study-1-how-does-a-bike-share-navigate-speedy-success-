@@ -83,6 +83,24 @@ Langkah-langkah pembersihan tercatat sebagai berikut:
 
 ### 6. 📊 Analisis Data (Analyze Phase)
 
+### 🔍 Awal Tahap Analisis (Analyze Phase - Step 1)
+
+Setelah data dibersihkan, kedua file (`Divvy_Trips_2019_Q1_Clean.csv` dan `Divvy_Trips_2020_Q1_Clean.csv`) digabungkan dan diberi kolom tambahan untuk mendukung analisis perilaku pengguna.
+
+| No | Langkah | Tujuan | Formula / Tools | Hasil |
+|----|----------|--------|----------------|--------|
+| 1 | Menggabungkan kedua dataset (2019_Q1 & 2020_Q1) | Membuat satu set data lengkap | Excel Power Query [Append] | Dataset gabungan `Cyclistic_Combined_2019-Q1&2020-Q1.xlsx` |
+| 2 | Tambahkan kolom `ride_length` | Menghitung durasi setiap perjalanan dalam menit | `=(ended_at - started_at)` | Kolom baru berhasil dibuat dengan format HH:MM:SS menggunakan Format>Cells>Time>37:30:55|
+| 3 | Tambahkan kolom `day_of_week` | Mengidentifikasi hari penggunaan | `=WEEKDAY(started_at,1)` | Kolom baru berhasil dibuat |
+| 4 | Simpan hasil akhir | Menyimpan data siap analisis | “Save As” → `/data/cleaned/Cyclistic_Combined_2019-Q1&2020-Q1_Ready.csv` | File siap untuk analisis deskriptif |
+
+**Status:**  
+✅ Struktur kolom konsisten  
+✅ Duplikasi dihapus  
+✅ Data gabungan siap dianalisis pada tahap berikutnya (pivot dan visualisasi)
+
+
+----- // lihat dan koreksi lagi
 Analisis dilakukan dengan tabel pivot dan statistik deskriptif di Excel.
 
 | No | Langkah | Tujuan | Hasil |
