@@ -137,7 +137,7 @@ Struktur direktori proyek ini disusun untuk menjaga keteraturan antara data ment
  ┃ ┣ 📂 raw
  ┃ ┃ ┣ Divvy_Trips_2019_Q1.csv
  ┃ ┃ ┗ Divvy_Trips_2020_Q1.csv
- ┃ ┗ 📂 cleaned
+ ┃ ┗ 📂 processed
  ┃   ┗ cyclistic_combined_cleaned.csv
  ┣ 📂 visuals
  ┃ ┣ avg_ride_length_chart.png
@@ -145,16 +145,17 @@ Struktur direktori proyek ini disusun untuk menjaga keteraturan antara data ment
  ┣ 📂 notebooks
  ┃ ┗ analysis_steps.xlsx
  ┗ 📜 README.md
+ ┗ 📜 README_EN.md
 
 ```
 
 ---
-***Penjelasan Struktur Folder
+***Penjelasan Struktur Folder***
 
 | Folder           | Isi                                  | Keterangan                                         |
 | ---------------- | ------------------------------------ | -------------------------------------------------- |
 | `/data/raw/`     | File CSV mentah dari Divvy Trip Data | Data asli tanpa perubahan                          |
-| `/data/cleaned/` | File hasil pembersihan data gabungan | Siap dianalisis                                    |
+| `/data/processed/` | File hasil pembersihan dan penggabungan data | Siap dianalisis                                    |
 | `/notebooks/`    | File Excel atau skrip analisis       | Proses analisis deskriptif dan pivot               |
 | `/visuals/`      | Gambar hasil visualisasi data        | Grafik dan diagram                                 |
 | `README.md`      | Dokumentasi utama proyek             | Berisi deskripsi lengkap proyek dan hasil analisis |
