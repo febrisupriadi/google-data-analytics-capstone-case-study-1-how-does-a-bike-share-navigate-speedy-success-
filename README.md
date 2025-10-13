@@ -191,6 +191,13 @@ write_csv(append1_clean, "case-study-1/Append1_final.csv")
 
 cat("✅ File 'Append1_final.csv' siap untuk analisis!\n")
 ``` 
+| File / Folder                             | Ukuran  | Fungsi / Keterangan                                                                                                                          |
+| ----------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Append1_final.csv**                     | 97.9 MB | ✅ Dataset hasil akhir (gabungan 2019 Q1 + 2020 Q1) — sudah bersih, memiliki kolom `ride_length` dan `day_of_week`, siap untuk analisis di R. |
+| **Divvy_Trips_2019_Q1_Clean.csv**         | 37.6 MB | File mentah hasil pembersihan 2019 Q1 sebelum digabung.                                                                                      |
+| **Divvy_Trips_2020_Q1_Clean.csv**         | 47 MB   | File mentah hasil pembersihan 2020 Q1 sebelum digabung.                                                                                      |
+| **Divvy_Trips_2019_Q1&2020-Q1_Clean.rar** | 12.5 MB | Arsip kompresi (mungkin backup manual sebelum penggabungan).                                                                                 |
+| **issues/** *(folder)*                    | —       | Menyimpan hasil deteksi baris error seperti `Append1_negative_ride_length.csv`.                                                              |
 
 ---
 
