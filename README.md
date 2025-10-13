@@ -152,10 +152,45 @@ cat("Jumlah total baris hasil Append1:", nrow(append1),
 ```
   
 - Kolom `ride_length` dihitung sebagai selisih waktu (`ended_at - started_at`) dalam menit.
+
+```{r}
+# 9️⃣ Hitung ride_length (dalam menit)
+append1 <- append1 %>%
+  mutate(
+    ride_length = as.numeric(difftime(ended_at, started_at, units = "mins"))
+  )
+```  
+
 - Ditemukan **25 baris dengan durasi negatif**, disimpan di `issues/Append1_negative_ride_length.csv`.
+```{r}
+# 🔟 Deteksi baris error (ended_at < started_at)
+error_rows <- append1 %>% filter(ride_length < 0)
+cat("Jumlah baris error (ride_length < 0):", nrow(error_rows), "\n")
+
+#hasilnya : Jumlah baris error (ride_length < 0): 25
+
+# Membuat folder issues untuk menyimpan file temuan
+if(!dir.exists("case-study-1/issues")){
+dir.create("case-study-1/issues")}
+
+# Menyimpan baris error dalam file .csv untuk referensi
+write_csv(error_rows, "case-study-1/issues/Append1_negative_ride_length.csv") 
+
+```  
 - Dataset bersih dan siap analisis disimpan sebagai `Append1_final.csv` dengan tambahan kolom `day_of_week`.
+```{r}
+# 1️⃣1️⃣ Dataset bersih tanpa baris error
+append1_clean <- append1 %>% filter(ride_length >= 0)
 
+# 1️⃣2️⃣ Tambahkan kolom day_of_week
+append1_clean <- append1_clean %>%
+  mutate(day_of_week = wday(started_at, label = TRUE, abbr = FALSE))
 
+# 1️⃣3️⃣ Simpan hasil akhir
+write_csv(append1_clean, "case-study-1/Append1_final.csv")
+
+cat("✅ File 'Append1_final.csv' siap untuk analisis!\n")
+``` 
 
 ---
 
